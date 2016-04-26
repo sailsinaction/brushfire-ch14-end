@@ -12,8 +12,8 @@ angular.module('brushfire').controller('tutorialsDetailVideoEditPageController',
 
   // set-up loading state
   $scope.tutorialsDetailVideoEdit = {
-    iframeHide: true,
-    loading: false
+    loading: false,
+    invalidUrl: false,
   };
 
   // Get the tutorial id form the current URL path:  /tutorials/55/videos/edit
@@ -33,6 +33,16 @@ angular.module('brushfire').controller('tutorialsDetailVideoEditPageController',
   $scope.minutes = $scope.tutorial.video.minutes;
   $scope.seconds = $scope.tutorial.video.seconds;
 
+  // Check to see if there's a video src and display it if there is if not display preview image
+  if ($scope.src) {
+    $scope.tutorialsDetailVideoEdit.hasSrc = true;
+    $scope.tutorialsDetailVideoEdit.iframeHide = false;
+  } else {
+    $scope.tutorialsDetailVideoEdit.hasSrc = false;
+    $scope.src = "/images/preview.jpg";
+    $scope.tutorialsDetailVideoEdit.iframeHide = true;
+  }
+
 /* 
   _____   ____  __  __   ______               _       
  |  __ \ / __ \|  \/  | |  ____|             | |      
@@ -47,7 +57,7 @@ angular.module('brushfire').controller('tutorialsDetailVideoEditPageController',
 
     e.preventDefault();
 
-    $scope.tutorialsDetailVideoNew.invalidUrl = false;
+    $scope.tutorialsDetailVideoEdit.invalidUrl = false;
 
     var rawUrl = document.createElement('a');
 
@@ -71,7 +81,7 @@ angular.module('brushfire').controller('tutorialsDetailVideoEditPageController',
 
     } else {
 
-      $scope.tutorialsDetailVideoNew.invalidUrl = true;
+      $scope.tutorialsDetailVideoEdit.invalidUrl = true;
     }
 
   };
