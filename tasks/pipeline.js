@@ -27,6 +27,7 @@ var jsFilesToInject = [
   // (because we use HTML attributes to configure it)
 
   // Inject all of the rest of our dependencies one by one here:
+  'js/dependencies/sails.io.js',
   'js/dependencies/angular.js',
   'js/dependencies/jquery.min.js',
   'js/dependencies/lodash.js',
